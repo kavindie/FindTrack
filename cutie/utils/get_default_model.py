@@ -23,9 +23,11 @@ def get_default_model(config) -> CUTIE:
     with open_dict(cfg):
         cfg['weights'] = os.path.join(weight_dir, 'cutie-base-mega.pth')
 
+    target_device = torch.device("cuda:3")
+
     # Load the network weights
-    cutie = CUTIE(cfg).cuda().eval()
-    model_weights = torch.load(cfg.weights)
+    cutie = CUTIE(cfg).to(target_device).eval()
+    model_weights = torch.load(cfg.weights, map_location=target_device)
     cutie.load_weights(model_weights)
 
     return cutie
