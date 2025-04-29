@@ -118,7 +118,7 @@ def test():
 
                 # consider vision-text alignment in addition to segmentation confidence
                 w1, w2 = 0.5, 0.5
-                clip_text = alpha_clip.tokenize([exp]).cuda()
+                clip_text = alphaclip.tokenize([exp]).cuda()
                 alpha = clip_preprocess_mask(ref_mask).cuda()
                 image_features = clip.visual(imgs_clip[i].unsqueeze(0).cuda(), alpha.unsqueeze(0))
                 text_features = clip.encode_text(clip_text)
